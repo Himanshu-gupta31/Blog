@@ -22,7 +22,8 @@ export class Service{
                     title,
                     content,
                     status,
-                    featuredImage,userId
+                    featuredImage,
+                    userId
             })
         } catch (error) {
             console.log(error)
@@ -83,6 +84,40 @@ export class Service{
             console.log(error)
             return false
           }
+    }
+    async uploadFile(file){
+       try {
+        return await this.bucket.createFile(
+            conf.appwriteBucketId,
+            ID.unique(),
+            file
+
+        )
+        
+       } catch (error) {
+         console.log(error)
+         return false
+       }
+    }
+    async deleteFile(fileId){
+        try {
+             await this.bucket.deleteFile(
+                conf.appwriteBucketId,
+                fileId
+            )
+            return true
+            
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+
+    }
+    getFilePreview(fileId){
+      return  this.bucket.getFilePreview(
+        conf.appwriteBucketId,
+        fileId
+      )
     }
 
 }
