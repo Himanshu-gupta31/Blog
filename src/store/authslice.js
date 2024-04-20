@@ -7,7 +7,7 @@ const initialState={
     name:"auth",
     initialState,
     reducers:{
-       login:(status,action)=>{
+       login:(state,action)=>{
             state.status=true,
             state.userData=action.payload.userData
        },
